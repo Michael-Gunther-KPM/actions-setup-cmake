@@ -1,5 +1,6 @@
 import * as tc from '@actions/tool-cache';
 import * as core from '@actions/core';
+import * as io from '@actions/io';
 import { promises as fsPromises } from 'fs';
 import * as path from 'path';
 import * as vi from './version-info';
@@ -73,9 +74,10 @@ function getURL(
 }
 
 async function getArchive(url: string): Promise<string> {
-  const download = await tc.downloadTool(url, path.join(process.env['RUNNER_TEMP'], 'cmake-installer.zip');
+  const download = await tc.downloadTool(url);
   if (url.endsWith('zip')) {
-    return await tc.extractZip(download);
+    io.mv(download, download+'zip'
+    return await tc.extractZip(download+'zip');
   } else if (url.endsWith('tar.gz')) {
     return await tc.extractTar(download);
   } else {
