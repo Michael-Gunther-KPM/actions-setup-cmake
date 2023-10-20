@@ -75,10 +75,9 @@ function getURL(
 
 async function getArchive(url: string): Promise<string> {
   const download = await tc.downloadTool(url);
-  throw new Error("Error this here error");
   if (url.endsWith('zip')) {
-    io.mv(download, download+'zip');
-    return await tc.extractZip(download+'zip');
+    io.mv(download, download + '.zip');
+    return await tc.extractZip(download + '.zip');
   } else if (url.endsWith('tar.gz')) {
     return await tc.extractTar(download);
   } else {
