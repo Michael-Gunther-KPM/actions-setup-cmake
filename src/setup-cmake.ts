@@ -73,7 +73,7 @@ function getURL(
 }
 
 async function getArchive(url: string): Promise<string> {
-  const download = await tc.downloadTool(url);
+  const download = await tc.downloadTool(url, path.join(_getTempDirectory(), "cmake-installer.zip");
   if (url.endsWith('zip')) {
     return await tc.extractZip(download);
   } else if (url.endsWith('tar.gz')) {
